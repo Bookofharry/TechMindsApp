@@ -5,7 +5,11 @@
   width: 100%;
   --marquee-gap: 1.25rem;
   --marquee-duration: 20s;
-  --marquee-gradient: 60px;
+  --marquee-gradient: 10px;
+  
+}
+div{
+  background-color: transparent;
 }
 
 /* Edge fades for a premium look */

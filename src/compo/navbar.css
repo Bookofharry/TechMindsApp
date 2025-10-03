@@ -7,7 +7,9 @@
 .custom-menubar {
   --menu-bg: #001f54;   /* navy */
   --text:    #ffffff;
-  --hover:   #2563eb;   /* tweak if you like */
+  /* --hover:   #2563eb;    */
+  border: none;
+  padding: 10px;
 }
 
 /* Base (desktop) */
@@ -22,7 +24,7 @@
 }
 .custom-menubar .p-menuitem-link:hover {
   background: var(--hover);
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Dropdown lists */
@@ -33,7 +35,7 @@
 .custom-menubar .p-submenu-list .p-menuitem-link { color: #f5f9ff; }
 .custom-menubar .p-submenu-list .p-menuitem-link:hover {
   background: var(--hover);
-  color: #ffffff;
+  color: #000000;
 }
 
 /* MOBILE FIXES */
