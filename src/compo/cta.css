@@ -1,0 +1,103 @@
+/* ===== Moving dot grid background ===== */
+.bg-grid {
+  background-image:
+    radial-gradient(currentColor 1px, transparent 1px),
+    radial-gradient(currentColor 1px, transparent 1px);
+  background-position: 0 0, 12px 12px;
+  background-size: 24px 24px;
+  color: #0b3a6a; /* dot color (auto lowered via opacity) */
+}
+@keyframes grid-move {
+  0%   { transform: translate3d(0,0,0); }
+  50%  { transform: translate3d(-12px,-10px,0); }
+  100% { transform: translate3d(0,0,0); }
+}
+.animate-grid { animation: grid-move 18s ease-in-out infinite; }
+
+/* ===== Blobs ===== */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(36px);
+  background-image: linear-gradient(to top right, var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to));
+  animation: blob 14s ease-in-out infinite;
+  pointer-events: none;
+}
+.delay-2000 { animation-delay: 2s; }
+.delay-4000 { animation-delay: 4s; }
+
+@keyframes blob {
+  0%   { transform: translate(0,0) scale(1); }
+  33%  { transform: translate(28px,-18px) scale(1.08); }
+  66%  { transform: translate(-24px,16px) scale(0.94); }
+  100% { transform: translate(0,0) scale(1); }
+}
+
+/* ===== Animated gradient headline & underline ===== */
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-x 8s ease infinite;
+}
+@keyframes underline {
+  0%   { transform: scaleX(0); opacity: .4; }
+  50%  { transform: scaleX(1.02); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+.animate-underline {
+  transform-origin: center;
+  animation: underline 900ms ease forwards;
+}
+
+/* ===== Super buttons: glow ring + magnetic lift + shine sweep ===== */
+.btn-super {
+  position: relative;
+  padding-inline: 1rem; /* keeps size steady despite glow */
+  border-radius: .5rem;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  will-change: transform;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-super:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,0.22); }
+
+/* glow ring */
+.btn-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from 90deg,
+    rgba(59,130,246,0.0),
+    rgba(59,130,246,0.6),
+    rgba(14,165,233,0.0),
+    rgba(59,130,246,0.6),
+    rgba(59,130,246,0.0));
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity .25s ease;
+  z-index: -1;
+}
+.btn-super:hover .btn-glow { opacity: .8; }
+
+/* shine sweep */
+.btn-super::after {
+  content: "";
+  position: absolute;
+  inset: -120% -40%;
+  background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.35), transparent 60%);
+  transform: translateX(-100%) rotate(8deg);
+  transition: transform .8s ease;
+  pointer-events: none;
+}
+.btn-super:hover::after { transform: translateX(100%) rotate(8deg); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-grid, .blob, .animate-gradient, .animate-underline,
+  .btn-super:hover, .btn-super::after, .btn-glow { animation: none !important; transition: none !important; }
+}
