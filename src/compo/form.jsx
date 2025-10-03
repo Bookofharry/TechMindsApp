@@ -1,5 +1,7 @@
 import { useState } from "react";
 import emailjs from '@emailjs/browser';
+
+import { Navigate } from "react-router-dom";
 export default function ContactSection() {
   const [form, setForm] = useState({
     firstName: "",
@@ -7,6 +9,7 @@ export default function ContactSection() {
     email: "",
     message: "",
   });
+  const [submitted, setSubmitted] = useState(false);
 
   
   function handleChange(e) {
@@ -16,20 +19,32 @@ export default function ContactSection() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    emailjs.send('service_89xjrbo', 'template_g7tg9y7', form, {
-      publicKey: '-zu_AKLUGbGPnAvcb',
-    })
-    .then(
-    (response) => {
-      console.log('SUCCESS!', response.status, response.text);
-    },
-    (err) => {
-      console.log('FAILED...', err);
-    },
-  );
-    // TODO: send form somewhere (fetch/axios)
-    console.log("Submitting form:", form);
+    setSubmitted(true);
+    try{
+      emailjs.send('service_89xjrbo', 'template_g7tg9y7', form, {
+        publicKey: '-zu_AKLUGbGPnAvcb',
+      })
+      .then(
+      (response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      },
+      (err) => {
+        console.log('FAILED...', err);
+      },
+      );
+      // TODO: send form somewhere (fetch/axios)
+      console.log("Submitting form:", form);
+            // success → redirect
+
+
+    }catch(err){
+
+
+
+
+    }
   }
+  if (submitted) return <Navigate to="/" replace />;
 
   return (
     <section className="bg-white dark:bg-gray-900">
