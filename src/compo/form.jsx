@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Mail from "../pages/Mail";
 import emailjs from '@emailjs/browser';
 
 import { Navigate } from "react-router-dom";
@@ -10,6 +11,7 @@ export default function ContactSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [next, nextSet] = useState(false);
 
   
   function handleChange(e) {
@@ -17,21 +19,26 @@ export default function ContactSection() {
     setForm(prev => ({ ...prev, [name]: value }));
   }
 
+  function Click(){
+    nextSet(true)
+    console.log('Clicked')
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    setSubmitted(true);
     try{
       emailjs.send('service_89xjrbo', 'template_g7tg9y7', form, {
         publicKey: '-zu_AKLUGbGPnAvcb',
       })
       .then(
-      (response) => {
-        console.log('SUCCESS!', response.status, response.text);
-      },
-      (err) => {
-        console.log('FAILED...', err);
-      },
+        (response) => {
+          console.log('SUCCESS!', response.status, response.text);
+        },
+        (err) => {
+          console.log('FAILED...', err);
+        },
       );
+      setSubmitted(true);
       // TODO: send form somewhere (fetch/axios)
       console.log("Submitting form:", form);
             // success → redirect
@@ -44,12 +51,14 @@ export default function ContactSection() {
 
     }
   }
-  if (submitted) return <Navigate to="/" replace />;
+  if (next) return <Navigate to="/" replace />;
+
 
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="container px-6 py-12 mx-auto">
         {/* ...left column unchanged... */}
+        {submitted ? <Mail click={Click} /> : <br/>}
 
         <div className="p-4 py-6 rounded-lg bg-gray-50 dark:bg-gray-800 md:p-8">
           <form id="contact-form" onSubmit={handleSubmit}>

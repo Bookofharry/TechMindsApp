@@ -8,6 +8,7 @@ import Facilities from './pages/Facilities'
 import Home from './pages/Home'
 import WebDev from './pages/WebDevelopment'
 import Footer from './compo/footer'
+import Mail from './pages/Mail'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App(){
@@ -51,6 +52,8 @@ function App(){
         <Route path='/programs/software-engineering/app-development' element={<AppDev />}/>
 
         <Route path='/contact' element={<Contact/>}/>
+
+        <Route path='/mail' element={<Mail />}/>
 
 
       </Routes>
