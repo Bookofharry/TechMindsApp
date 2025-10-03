@@ -15,7 +15,7 @@ export default function ContactSection() {
   }
 
   function handleSubmit(e) {
-    
+    e.preventDefault();
     emailjs.send('service_89xjrbo', 'template_g7tg9y7', form, {
       publicKey: '-zu_AKLUGbGPnAvcb',
     })
