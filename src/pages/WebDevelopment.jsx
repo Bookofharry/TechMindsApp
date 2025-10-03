@@ -1,8 +1,20 @@
 import Progress from "../compo/progress"
-function WebDev(){
+import { useState } from "react"
+function WebDevelopment(){
+
+    function remove(){
+        setTimeout(() => {
+            setStatus(() => true)
+        },2000)
+    }
+    const [status,setStatus] = useState(false)
+    remove()
     return(
-        <Progress />
+        <div>
+            {(!status) ? <Progress /> : <span></span>}
+
+        </div>
     )
 }
 
-export default WebDev
+export default WebDevelopment
