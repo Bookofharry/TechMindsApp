@@ -40,7 +40,7 @@ export default function Learn() {
               </span>
               <span className="mt-2 block">
                 <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
-                  SKILLS
+                  TECH SKILLS
                 </span>
               </span>
             </h1>
